@@ -2,6 +2,9 @@ import ply.lex as lex
 import ply.yacc as yacc
 import sys
 from ply.lex import TOKEN
+from treelib import Node, Tree
+
+sceneTree = Tree()
 
 tokens = (
     'CHARACTER', 
@@ -20,6 +23,7 @@ reserved = {
     'init': 'INIT',
     'as': 'AS',
     'to' : 'TO',
+    'modify' : 'MODIFY',
     'Scene': 'SCENE',
     'Option': 'OPTION',
     'Item': 'ITEM',
@@ -126,13 +130,6 @@ def p_Main(p):
     """
     pass
 
-# def p_Exp(p):
-#     """
-#     Exp : INIT Id AS ObjectDef
-#         | AddFunc Id TO Id SEMICOLON
-#     """
-#     pass
-
 def p_Exp_Init(p):
     """
     Exp : INIT Id AS ObjectDef
@@ -142,6 +139,18 @@ def p_Exp_Init(p):
 def p_Exp_AddFunc(p):
     """
     Exp : AddFunc Id TO Id SEMICOLON
+    """
+    pass
+
+def p_Exp_Display(p):
+    """
+    Exp : DisplayFunc Id SEMICOLON
+    """
+    pass
+
+def p_Exp_Modify(p):
+    """
+    Exp : MODIFY Id Def SEMICOLON
     """
     pass
 
@@ -158,16 +167,22 @@ def p_ExpList(p):
     """
     pass
 
-def p_ObjectName(p):
+def p_ObjectType(p):
     """
-    ObjectName : SCENE
+    ObjectType : SCENE
                 | OPTION
     """
     pass
 
 def p_ObjectDef(p):
     """
-    ObjectDef : ObjectName LPAREN AttrList RPAREN SEMICOLON
+    ObjectDef : ObjectType Def SEMICOLON
+    """
+    pass
+
+def p_Def(p):
+    """
+    Def : LPAREN AttrList RPAREN
     """
     pass
 
@@ -210,6 +225,13 @@ def p_AddFunc(p):
     """
     pass
 
+def p_DisplayFunc(p):
+    """
+    DisplayFunc : DISPLAY_SCENE
+                | DISPLAY_OPTION
+    """
+    pass
+
 def p_Quit(p):
     """
     Quit : QUIT SEMICOLON
@@ -226,28 +248,30 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-# data = """
-# init shrine_entrance as Scene (
-#     name = "Shrine Entrance",
-#  	desc = "A shrine"
-# );
+data = """
+init shrine_entrance as Scene (
+    name = "Shrine Entrance",
+ 	desc = "A shrine"
+);
+add_option attack_guard to guard_parries;
+add_next_scene guard_parries to shrine_entrance;
+modify shrine_entrance (
+    name = "The Shrine Entrance",
+ 	desc = "A new shrine"
+);
+display_scene shrine_entrance;
+"""
 
-# add_option attack_guard to guard_parries;
+parser.parse(input = data, lexer = lexer)
 
-# add_next_scene guard_parries to shrine_entrance;
-# """
+# ----------------------------------------------
 
-# parser.parse(input = data, lexer = lexer)
+# filename = input('Input file: ')
 
-print("Welcome to MANA!\n")
+# file = open(filename, 'r')
 
-while True:
-    try:
-        s = input('>> ')
-    except EOFError:
-        break
-    except KeyboardInterrupt:
-        break
-    if not s: continue
-    result = parser.parse(s, lexer=lexer)
-    print(result)
+# s = ''
+# for line in file:
+#     s+=line
+
+# parser.parse(input = s, lexer = lexer)
