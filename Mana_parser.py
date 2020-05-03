@@ -1,10 +1,16 @@
+import sys
 import ply.lex as lex
 import ply.yacc as yacc
-import sys
 from ply.lex import TOKEN
-from treelib import Node, Tree
+from scene import Scene, Option
+from game_engine import GameEngine
+# from treelib import Node, Tree
 
-sceneTree = Tree()
+# sceneTree = Tree()
+reference_log = {}
+initialScene: Scene = None
+
+### ----------------------------------------------------------------------
 
 tokens = (
     'CHARACTER', 
@@ -76,51 +82,6 @@ def t_error(t):
 
 lexer = lex.lex()
 
-# data = """
-# init shrine_entrance as Scene (
-# 	name = "Shrine Entrance",
-# 	desc = "A shrine"
-# );
-
-# init attack_guard as Option (
-# 	name = "Attack the guard",
-# 	desc = "You change in! No time for questions!"
-# );
-
-# init run_away as Option (
-# 	name = "Run away in terror"
-# 	desc = "You turn back and run as fast as you can."
-# );
-
-# init approach_guard as Option (
-# 	name = "Approach the guard carefully",
-# 	desc = "You cautiously approach the skeleton guard."
-# );
-
-# init guard_parries as Scene (
-# 	name = "Guard parries",
-# 	desc = "The skeleton guard reacts with swift movements."
-# );
-
-# add_option attack_guard to guard_parries;
-
-# add_next_scene guard_parries to shrine_entrance;
-
-# init back_at_village as Scene (
-# 	name = "Back at village",
-# 	desc = "You find yourself back in the village."
-# );
-
-# add_option run_away to back_at_village;
-# add_next_scene back_at_village to shrine_entrance;
-# """
-
-# lexer.input(data)
-# while True:
-#     tok = lexer.token()
-#     if not tok:
-#         break
-#     print(tok)
 
 #---------------------------------------------------------
 
@@ -128,109 +89,180 @@ def p_Main(p):
     """
     Main : ExpList
     """
-    pass
+    p[0] = p[1]
+    engine = GameEngine()
+    engine.run_game(initialScene)
+    # pass
 
 def p_Exp_Init(p):
     """
     Exp : INIT Id AS ObjectDef
     """
-    pass
+    global initialScene
+    p[0] = (p[1], p[2], p[4])
+    reference_log[p[2]] = p[4]
+    # print("Created new element: ", type(p[4]))
+    if isinstance(p[4], Scene) and initialScene==None:
+        initialScene = p[4]
+    # pass
 
 def p_Exp_AddFunc(p):
     """
     Exp : AddFunc Id TO Id SEMICOLON
     """
-    pass
+    p[0] = (p[1], p[2], p[4])
+    # try:
+    #     child = reference_log[p[2]]
+    #     paren = reference_log[p[4]]
+    # except:
+    #     raise Exception('Object does not exist!')
+    child = reference_log[p[2]]
+    paren = reference_log[p[4]]
+    if p[1] == 'add_next_scene' and isinstance(child, Scene) and isinstance(paren, Scene):
+        paren.add_next_scene(child)
+        # print("Added scene ", child.name, " to ", paren.name)
+    elif p[1] == 'add_option' and isinstance(child, Option) and isinstance(paren, Scene):
+        paren.set_option(child)
+        # print("Set option ", child.name, " to scene ", paren.name)
+    # pass
 
 def p_Exp_Display(p):
     """
     Exp : DisplayFunc Id SEMICOLON
     """
-    pass
+    p[0] = (p[1], p[2])
+    obj = reference_log[p[2]]
+    if p[1] == 'display_scene' and isinstance(obj, Scene):
+        # print("Displaying scene...")
+        obj.display_scene()
+    elif p[1] == 'display_option' and isinstance(obj, Option):
+        # print("Displaying option...")
+        obj.display_option()
+    # pass
 
 def p_Exp_Modify(p):
     """
     Exp : MODIFY Id Def SEMICOLON
     """
-    pass
+    p[0] = (p[1], p[2], p[3])
+    obj = reference_log[p[2]]
+    if isinstance(obj, Scene) :
+        # print("Modified scene ", obj.name)
+        obj.modify_scene(p[3][0], p[3][1])
+    elif isinstance(obj, Option) :
+        # print("Modified option ", obj.name)
+        obj.modify_option(p[3][0], p[3][1])
+    # pass
 
 def p_Exp_Quit(p):
     """
     Exp : Quit
     """
-    pass
+    p[0] = p[1]
+    print("Goodbye!")
+    # pass
+
+def p_Exp_Empty(p):
+    """
+    Exp : Empty
+    """
+    p[0] = p[1]
+    # pass
 
 def p_ExpList(p):
     """
     ExpList : Exp ExpList
             | Exp
     """
-    pass
+    try:
+        p[0] = [p[1]]+p[2]
+    except:
+        p[0] = [p[1]]
+    # pass
 
 def p_ObjectType(p):
     """
     ObjectType : SCENE
                 | OPTION
     """
-    pass
+    p[0] = p[1]
+    # pass
 
 def p_ObjectDef(p):
     """
     ObjectDef : ObjectType Def SEMICOLON
     """
-    pass
+    # p[0] = (p[1], p[2])
+    if p[1] == 'Scene':
+        p[0] = Scene(p[2][0], p[2][1])
+    elif p[1] == 'Option':
+        p[0] = Option(p[2][0], p[2][1])
+    # pass
 
 def p_Def(p):
     """
     Def : LPAREN AttrList RPAREN
     """
-    pass
-
-def p_AttrDeclar(p):
-    """
-    AttrDeclar : Attribute EQ StrVal
-    """
-    pass
+    p[0] = p[2]
+    # pass
 
 def p_AttrList(p):
     """
     AttrList : AttrDeclar COMMA AttrList
             | AttrDeclar
     """
-    pass
+    try:
+        p[0] = [p[1]]+p[3]
+    except:
+        p[0] = [p[1]]
+    # pass
+
+def p_AttrDeclar(p):
+    """
+    AttrDeclar : Attribute EQ StrVal
+    """
+    p[1] = p[3]
+    p[0] = p[1]
+    # p[0] = (p[1], p[3])
+    # pass
 
 def p_StrVal(p):
     """
     StrVal : STRING
     """
-    pass
+    p[0] = p[1]
+    # pass
 
 def p_Attribute(p):
     """
     Attribute : NAME
                 | DESC
     """
-    pass
+    p[0] = p[1]
+    # pass
 
 def p_Id(p):
     """
     Id : ID
     """
-    pass
+    p[0] = p[1]
+    # pass
 
 def p_AddFunc(p):
     """
     AddFunc : ADD_OPTION
             | ADD_NEXT_SCENE
     """
-    pass
+    p[0] = p[1]
+    # pass
 
 def p_DisplayFunc(p):
     """
     DisplayFunc : DISPLAY_SCENE
                 | DISPLAY_OPTION
     """
-    pass
+    p[0] = p[1]
+    # pass
 
 def p_Quit(p):
     """
@@ -238,9 +270,10 @@ def p_Quit(p):
     """
     exit()
 
-# def p_Empty(p):
-#     'Empty :'
-#     pass
+def p_Empty(p):
+    'Empty :'
+    p[0] = None
+    # pass
 
 
 def p_error(p):
@@ -248,30 +281,8 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-data = """
-init shrine_entrance as Scene (
-    name = "Shrine Entrance",
- 	desc = "A shrine"
-);
-add_option attack_guard to guard_parries;
-add_next_scene guard_parries to shrine_entrance;
-modify shrine_entrance (
-    name = "The Shrine Entrance",
- 	desc = "A new shrine"
-);
-display_scene shrine_entrance;
-"""
+### -------------------------------------------------------------------------------
 
-parser.parse(input = data, lexer = lexer)
+# parser.parse(input = data, lexer = lexer)
 
 # ----------------------------------------------
-
-# filename = input('Input file: ')
-
-# file = open(filename, 'r')
-
-# s = ''
-# for line in file:
-#     s+=line
-
-# parser.parse(input = s, lexer = lexer)
