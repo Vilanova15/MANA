@@ -1,7 +1,20 @@
 from Mana_parser import parser, lexer
 
+def showBanner():
+    banner = open("banner.txt", 'r')
+    bannerStr = ''
+    for line in banner:
+        bannerStr += line
+    print(bannerStr)
+
 def main():
-    filename = input("File: ")
+    showBanner()
+
+    try:
+        filename = input("File: ")
+    except:
+        return
+        
     file = open(filename, 'r')
 
     s = ''
