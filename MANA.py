@@ -1,14 +1,8 @@
 from Mana_parser import parser, lexer
-
-def showBanner():
-    banner = open("banner.txt", 'r')
-    bannerStr = ''
-    for line in banner:
-        bannerStr += line
-    print(bannerStr)
+import banner
 
 def main():
-    showBanner()
+    banner.printbychar(("logo.txt", "banner.txt"))
 
     try:
         filename = input("File: ")
