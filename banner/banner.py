@@ -14,15 +14,16 @@ def printbychar(files):
                 bannerStr += character
                 print(bannerStr)
 
-def printbyline(filename):
+def printbyline(files):
     bannerStr = ''
     bannerStr += "\n"
-    banner = open(filename, 'r')
-    for line in banner:
-        time.sleep(0.1)
-        clear()
-        bannerStr += line
-        print(bannerStr)       
+    for filename in files:
+        banner = open(filename, 'r')
+        for line in banner:
+            time.sleep(0.1)
+            clear()
+            bannerStr += line
+            print(bannerStr)       
 
 
 def clear():
@@ -41,4 +42,8 @@ class UnsupportedOsException(Exception):
 if __name__ == "__main__":
     printbychar(("logo.txt", "banner.txt"))
     print("\n\n\n")
-    #printbyline("gameover.txt")
+    printbychar(("game.txt", "over.txt"))
+
+    printbyline(("logo.txt", "banner.txt"))
+    print("\n\n\n")
+    printbyline(("game.txt", "over.txt"))
