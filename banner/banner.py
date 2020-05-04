@@ -28,12 +28,12 @@ def printbyline(files):
 
 def clear():
     system_os = platform.system()
-    if system_os == "Linux":
+    if (system_os == "Linux") or (system_os == "Darwin"):
         os.system("clear")
     elif system_os == "Windows":
         os.system("cls")
     else:
-        print("ARE YOU USING MAC????")
+        print("What OS are you using????")
         raise UnsupportedOsException
 
 class UnsupportedOsException(Exception):
