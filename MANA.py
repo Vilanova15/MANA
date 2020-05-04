@@ -1,15 +1,13 @@
+import sys
 from Mana_parser import parser, lexer
 import banner
 
+inFile = sys.argv[1]
+
 def main():
     banner.printbychar(("logo.txt", "banner.txt"))
-
-    try:
-        filename = input("File: ")
-    except:
-        return
         
-    file = open(filename, 'r')
+    file = open(inFile, 'r')
 
     s = ''
     for line in file:

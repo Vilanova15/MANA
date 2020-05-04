@@ -92,7 +92,6 @@ def p_Main(p):
     p[0] = p[1]
     engine = GameEngine()
     engine.run_game(initialScene)
-    # pass
 
 def p_Exp_Init(p):
     """
@@ -101,10 +100,8 @@ def p_Exp_Init(p):
     global initialScene
     p[0] = (p[1], p[2], p[4])
     reference_log[p[2]] = p[4]
-    # print("Created new element: ", type(p[4]))
     if isinstance(p[4], Scene) and initialScene==None:
         initialScene = p[4]
-    # pass
 
 def p_Exp_AddFunc(p):
     """
@@ -120,11 +117,8 @@ def p_Exp_AddFunc(p):
     paren = reference_log[p[4]]
     if p[1] == 'add_next_scene' and isinstance(child, Scene) and isinstance(paren, Scene):
         paren.add_next_scene(child)
-        # print("Added scene ", child.name, " to ", paren.name)
     elif p[1] == 'add_option' and isinstance(child, Option) and isinstance(paren, Scene):
         paren.set_option(child)
-        # print("Set option ", child.name, " to scene ", paren.name)
-    # pass
 
 def p_Exp_Display(p):
     """
@@ -133,12 +127,9 @@ def p_Exp_Display(p):
     p[0] = (p[1], p[2])
     obj = reference_log[p[2]]
     if p[1] == 'display_scene' and isinstance(obj, Scene):
-        # print("Displaying scene...")
         obj.display_scene()
     elif p[1] == 'display_option' and isinstance(obj, Option):
-        # print("Displaying option...")
         obj.display_option()
-    # pass
 
 def p_Exp_Modify(p):
     """
@@ -147,12 +138,9 @@ def p_Exp_Modify(p):
     p[0] = (p[1], p[2], p[3])
     obj = reference_log[p[2]]
     if isinstance(obj, Scene) :
-        # print("Modified scene ", obj.name)
         obj.modify_scene(p[3][0], p[3][1])
     elif isinstance(obj, Option) :
-        # print("Modified option ", obj.name)
         obj.modify_option(p[3][0], p[3][1])
-    # pass
 
 def p_Exp_Quit(p):
     """
@@ -160,14 +148,12 @@ def p_Exp_Quit(p):
     """
     p[0] = p[1]
     print("Goodbye!")
-    # pass
 
 def p_Exp_Empty(p):
     """
     Exp : Empty
     """
     p[0] = p[1]
-    # pass
 
 def p_ExpList(p):
     """
@@ -178,7 +164,6 @@ def p_ExpList(p):
         p[0] = [p[1]]+p[2]
     except:
         p[0] = [p[1]]
-    # pass
 
 def p_ObjectType(p):
     """
@@ -186,25 +171,21 @@ def p_ObjectType(p):
                 | OPTION
     """
     p[0] = p[1]
-    # pass
 
 def p_ObjectDef(p):
     """
     ObjectDef : ObjectType Def SEMICOLON
     """
-    # p[0] = (p[1], p[2])
     if p[1] == 'Scene':
         p[0] = Scene(p[2][0], p[2][1])
     elif p[1] == 'Option':
         p[0] = Option(p[2][0], p[2][1])
-    # pass
 
 def p_Def(p):
     """
     Def : LPAREN AttrList RPAREN
     """
     p[0] = p[2]
-    # pass
 
 def p_AttrList(p):
     """
@@ -215,7 +196,6 @@ def p_AttrList(p):
         p[0] = [p[1]]+p[3]
     except:
         p[0] = [p[1]]
-    # pass
 
 def p_AttrDeclar(p):
     """
@@ -223,15 +203,12 @@ def p_AttrDeclar(p):
     """
     p[1] = p[3]
     p[0] = p[1]
-    # p[0] = (p[1], p[3])
-    # pass
 
 def p_StrVal(p):
     """
     StrVal : STRING
     """
     p[0] = p[1]
-    # pass
 
 def p_Attribute(p):
     """
@@ -239,14 +216,12 @@ def p_Attribute(p):
                 | DESC
     """
     p[0] = p[1]
-    # pass
 
 def p_Id(p):
     """
     Id : ID
     """
     p[0] = p[1]
-    # pass
 
 def p_AddFunc(p):
     """
@@ -254,7 +229,6 @@ def p_AddFunc(p):
             | ADD_NEXT_SCENE
     """
     p[0] = p[1]
-    # pass
 
 def p_DisplayFunc(p):
     """
@@ -262,7 +236,6 @@ def p_DisplayFunc(p):
                 | DISPLAY_OPTION
     """
     p[0] = p[1]
-    # pass
 
 def p_Quit(p):
     """
@@ -273,7 +246,6 @@ def p_Quit(p):
 def p_Empty(p):
     'Empty :'
     p[0] = None
-    # pass
 
 
 def p_error(p):
