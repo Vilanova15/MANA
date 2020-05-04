@@ -1,4 +1,6 @@
-from Mana_parser import parser, lexer
+from scripts import Mana_parser
+
+parser = Mana_parser.parser
 
 file = open("testcode.txt", 'r')
 

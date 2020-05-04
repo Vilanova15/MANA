@@ -1,4 +1,4 @@
-from scene import Scene, Option
+from .scene import Scene, Option
 
 class GameEngine:
     def init(self):

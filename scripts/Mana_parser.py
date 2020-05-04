@@ -2,8 +2,8 @@ import sys
 import ply.lex as lex
 import ply.yacc as yacc
 from ply.lex import TOKEN
-from scene import Scene, Option
-from game_engine import GameEngine
+from .scene import Scene, Option
+from .game_engine import GameEngine
 # from treelib import Node, Tree
 
 # sceneTree = Tree()
