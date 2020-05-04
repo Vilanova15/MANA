@@ -41,4 +41,4 @@ class UnsupportedOsException(Exception):
 if __name__ == "__main__":
     printbychar(("logo.txt", "banner.txt"))
     print("\n\n\n")
-    printbyline("gameover.txt")
+    #printbyline("gameover.txt")
