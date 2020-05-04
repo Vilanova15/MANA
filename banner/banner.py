@@ -37,3 +37,8 @@ def clear():
 
 class UnsupportedOsException(Exception):
     pass
+
+if __name__ == "__main__":
+    printbychar(("logo.txt", "banner.txt"))
+    print("\n\n\n")
+    printbyline("gameover.txt")
