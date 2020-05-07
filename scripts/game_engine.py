@@ -19,6 +19,7 @@ class GameEngine:
     def move(self, scene: Scene, option: str) -> Scene:
         for s in scene.get_next_scenes():
             if s.get_option().get_name() == option:
+                print(s.get_option().get_desc(), "\n")
                 return s
 
     def run_game(self, scene: Scene):
@@ -29,7 +30,7 @@ class GameEngine:
 
         if len(opt_list)==0:
             print(scene.get_desc())
-            time.sleep(1.0)
+            time.sleep(4)
             self.game_over()
             return
 

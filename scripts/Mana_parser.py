@@ -241,7 +241,7 @@ def p_StrVal(p):
     """
     StrVal : STRING
     """
-    p[0] = p[1]
+    p[0] = p[1].split('"')[1]
 
 def p_Attribute(p):
     """
