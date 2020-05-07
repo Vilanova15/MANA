@@ -1,8 +1,20 @@
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'banner'))
+
+import time
+from banner import banner
+# from scene import Scene, Option
 from .scene import Scene, Option
 
 class GameEngine:
     def init(self):
         super.__init__()
+
+    def loading_screen(self):
+        banner.printbyline(("./banner/logo.txt", "./banner/banner.txt"))
+
+    def game_over(self):
+        banner.printbyline(("./banner/game.txt", "./banner/over.txt"))
 
     def move(self, scene: Scene, option: str) -> Scene:
         for s in scene.get_next_scenes():
@@ -14,6 +26,13 @@ class GameEngine:
             return
 
         opt_list = scene.generate_option_list()
+
+        if len(opt_list)==0:
+            print(scene.get_desc())
+            time.sleep(1.0)
+            self.game_over()
+            return
+
         scene.play_scene()
 
         try:

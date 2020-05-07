@@ -4,9 +4,9 @@ import ply.yacc as yacc
 from ply.lex import TOKEN
 from .scene import Scene, Option
 from .game_engine import GameEngine
-# from treelib import Node, Tree
+# from scene import Scene, Option
+# from game_engine import GameEngine
 
-# sceneTree = Tree()
 reference_log = {}
 initialScene: Scene = None
 
@@ -91,6 +91,7 @@ def p_Main(p):
     """
     p[0] = p[1]
     engine = GameEngine()
+    engine.loading_screen()
     engine.run_game(initialScene)
 
 def p_Exp_Init(p):
@@ -99,8 +100,12 @@ def p_Exp_Init(p):
     """
     global initialScene
     p[0] = (p[1], p[2], p[4])
-    reference_log[p[2]] = p[4]
-    if isinstance(p[4], Scene) and initialScene==None:
+    try:
+        reference_log[p[2]] = p[4]
+    except:
+        print("Referenced id already exists: ", p[2])
+        return
+    if isinstance(p[4], Scene) and initialScene == None:
         initialScene = p[4]
 
 def p_Exp_AddFunc(p):
@@ -108,39 +113,59 @@ def p_Exp_AddFunc(p):
     Exp : AddFunc Id TO Id SEMICOLON
     """
     p[0] = (p[1], p[2], p[4])
-    # try:
-    #     child = reference_log[p[2]]
-    #     paren = reference_log[p[4]]
-    # except:
-    #     raise Exception('Object does not exist!')
-    child = reference_log[p[2]]
-    paren = reference_log[p[4]]
+    try:
+        child = reference_log[p[2]]
+        paren = reference_log[p[4]]
+    except KeyError:
+        print("One or more referenced objects do not exist: ", p[0])
+        return
+
     if p[1] == 'add_next_scene' and isinstance(child, Scene) and isinstance(paren, Scene):
         paren.add_next_scene(child)
     elif p[1] == 'add_option' and isinstance(child, Option) and isinstance(paren, Scene):
         paren.set_option(child)
+    else:
+        print("Referenced objects do not match function type: ", p[0])
 
 def p_Exp_Display(p):
     """
     Exp : DisplayFunc Id SEMICOLON
     """
     p[0] = (p[1], p[2])
-    obj = reference_log[p[2]]
+    try:
+        obj = reference_log[p[2]]
+    except KeyError:
+        print("Referenced object does not exist: ", p[2])
+        return
     if p[1] == 'display_scene' and isinstance(obj, Scene):
         obj.display_scene()
     elif p[1] == 'display_option' and isinstance(obj, Option):
         obj.display_option()
+    else:
+        print("Referenced object does not match function type: ", p[0])
 
 def p_Exp_Modify(p):
     """
     Exp : MODIFY Id Def SEMICOLON
     """
     p[0] = (p[1], p[2], p[3])
-    obj = reference_log[p[2]]
+    try:
+        obj = reference_log[p[2]]
+    except:
+        print("Referenced object does not exist: ", p[2])
+        return
     if isinstance(obj, Scene) :
-        obj.modify_scene(p[3][0], p[3][1])
+        try:
+            obj.modify_scene(p[3][0], p[3][1])
+        except:
+            print("Expected {} attributes unmatched".format(Scene))
+            return
     elif isinstance(obj, Option) :
-        obj.modify_option(p[3][0], p[3][1])
+        try:
+            obj.modify_option(p[3][0], p[3][1])
+        except:
+            print("Expected {} attributes unmatched".format(Option))
+            return
 
 def p_Exp_Quit(p):
     """
@@ -177,9 +202,17 @@ def p_ObjectDef(p):
     ObjectDef : ObjectType Def SEMICOLON
     """
     if p[1] == 'Scene':
-        p[0] = Scene(p[2][0], p[2][1])
+        try:
+            p[0] = Scene(p[2][0], p[2][1])
+        except:
+            print("Expected attributes for {} unmatched".format(Scene))
+            return
     elif p[1] == 'Option':
-        p[0] = Option(p[2][0], p[2][1])
+        try:
+            p[0] = Option(p[2][0], p[2][1])
+        except:
+            print("Expected attributes for {} unmatched".format(Option))
+            return
 
 def p_Def(p):
     """
@@ -254,6 +287,14 @@ def p_error(p):
 parser = yacc.yacc()
 
 ### -------------------------------------------------------------------------------
+
+# data = """
+# # display_scene scene1;
+# init shrine_entrance as Scene (
+# 	name = "Shrine Entrance",
+# 	desc = "A spooky shrine looms in front of you. A guard blocks your way."
+# );
+# """
 
 # parser.parse(input = data, lexer = lexer)
 

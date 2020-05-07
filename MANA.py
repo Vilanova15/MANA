@@ -1,13 +1,11 @@
 import sys
 from scripts import Mana_parser
-from banner import banner
 
 inFile = sys.argv[1]
 parser = Mana_parser.parser
 lexer = Mana_parser.lexer
 
 def main():
-    banner.printbychar(("banner/logo.txt", "banner/banner.txt"))
         
     file = open(inFile, 'r')
 

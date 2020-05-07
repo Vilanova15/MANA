@@ -1,5 +1,5 @@
 class Scene:
-    def __init__(self, name='', desc=''):
+    def __init__(self, name: str='', desc: str=''):
         self.name = name
         self.desc = desc
         self.option: Option = None
@@ -68,7 +68,7 @@ class Scene:
 
 
 class Option:
-    def __init__(self, name='', desc=''):
+    def __init__(self, name: str='', desc: str=''):
         self.name = name
         self.desc = desc
 
