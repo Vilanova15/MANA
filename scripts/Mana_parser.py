@@ -42,7 +42,8 @@ reserved = {
     'add_option': 'ADD_OPTION',
     'add_next_scene': 'ADD_NEXT_SCENE',
     'get_option_input': 'GET_OPTION_INPUT',
-    'quit' : 'QUIT'
+    'quit' : 'QUIT',
+    'var' : 'VAR'
 }
 
 tokens = tokens + tuple(reserved.values())
@@ -110,6 +111,13 @@ def p_Main(p):
     engine = GameEngine()
     engine.loading_screen()
     engine.run_game(initialScene)
+
+def p_Exp_Var(p):
+    """
+    Exp : VAR Id EQ StrVal SEMICOLON
+    """
+    p[0] = (p[1], p[2], p[4])
+    reference_log[p[2]] = p[4]
 
 def p_Exp_Init(p):
     """
@@ -250,8 +258,13 @@ def p_AttrList(p):
 def p_AttrDeclar(p):
     """
     AttrDeclar : Attribute EQ StrVal
+                | Attribute EQ Id
     """
-    p[1] = p[3]
+    try:
+        val = reference_log[p[3]]
+    except:
+        val = p[3]
+    p[1] = val
     p[0] = p[1]
 
 def p_StrVal(p):
