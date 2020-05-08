@@ -23,6 +23,8 @@ tokens = (
     'EQ',
     'QUOM',
     'STRING',
+    'CONCAT',
+    'NEWLINE',
 )
 
 reserved = {
@@ -54,9 +56,11 @@ t_COMMA = r','
 t_SEMICOLON = r';'
 t_EQ = r'='
 t_QUOM = r'\"'
+t_CONCAT = r'\+'
+t_NEWLINE = r'\\n'
 
 identifier = r'(' + t_CHARACTER + r'(' + t_CHARACTER + r'|' + t_DIGIT + r')*)'
-string = r'(' + t_QUOM + r'(.)*' + t_QUOM + r')'
+string = r'(' + t_QUOM + r'([^\"])*' + t_QUOM + r')'
 
 @TOKEN(identifier)
 def t_ID(t):
@@ -82,6 +86,19 @@ def t_error(t):
 
 lexer = lex.lex()
 
+# data = """
+# init shrine_entrance as Scene (
+# 	name = "Shrine Entrance",
+# 	desc = "A spooky shrine looms in front of you." + \\n + "A guard blocks your way."
+# );
+# """
+
+# lexer.input(data)
+# while True:
+#     tok = lexer.token()
+#     if not tok:
+#         break
+#     print(tok)
 
 #---------------------------------------------------------
 
@@ -239,9 +256,26 @@ def p_AttrDeclar(p):
 
 def p_StrVal(p):
     """
-    StrVal : STRING
+    StrVal : StrList
     """
-    p[0] = p[1].split('"')[1]
+    p[0] = p[1]
+
+def p_StrList(p):
+    """
+    StrList : STRING CONCAT StrList
+            | STRING CONCAT NEWLINE CONCAT StrList
+            | STRING
+    """
+    strn = p[1].split('"')[1]
+    try:
+        if not p[2]:
+            p[0] = strn
+        elif p[3] == "\\n":
+            p[0] = strn + "\n" + p[5]
+        else:
+            p[0] = strn + p[3]
+    except IndexError:
+        p[0] = strn
 
 def p_Attribute(p):
     """
@@ -289,10 +323,9 @@ parser = yacc.yacc()
 ### -------------------------------------------------------------------------------
 
 # data = """
-# # display_scene scene1;
 # init shrine_entrance as Scene (
 # 	name = "Shrine Entrance",
-# 	desc = "A spooky shrine looms in front of you. A guard blocks your way."
+# 	desc = "A spooky shrine looms in front of you." + \\n + "A guard blocks your way."
 # );
 # """
 

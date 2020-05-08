@@ -2,6 +2,7 @@ import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'banner'))
 
 import time
+# import banner
 from banner import banner
 # from scene import Scene, Option
 from .scene import Scene, Option

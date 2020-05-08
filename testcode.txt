@@ -1,7 +1,7 @@
 # Initial scene
 init shrine_entrance as Scene (
 	name = "Shrine Entrance",
-	desc = "A spooky shrine looms in front of you. A guard blocks your way."
+	desc = "A spooky shrine looms in front of you." + \n + "A guard blocks your way."
 );
 
 # Initial scene options
@@ -33,7 +33,7 @@ init back_at_village as Scene (
 
 init cautious_approach as Scene (
 	name = "Cautious approach",
-	desc = "You silently move towards the guard. You hide behind a corner, keeping your eyes on him."
+	desc = "You silently move towards the guard." + \n + "You hide behind a corner, keeping your eyes on him."
 );
 
 # Setting scene options
