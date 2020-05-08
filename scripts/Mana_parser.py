@@ -230,6 +230,8 @@ def p_ObjectDef(p):
         except:
             print("Expected attributes for {} unmatched".format(Option))
             return
+    else:
+        print("Unexpected object type: ", p[1])
 
 def p_Def(p):
     """
