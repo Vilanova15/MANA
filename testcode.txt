@@ -1,0 +1,51 @@
+# Initial scene
+init shrine_entrance as Scene (
+	name = "Shrine Entrance",
+	desc = "A spooky shrine looms in front of you." + \n + "A guard blocks your way."
+);
+
+# Initial scene options
+init attack_guard as Option (
+	name = "Attack the guard",
+	desc = "You change in! No time for questions!"
+);
+
+init run_away as Option (
+	name = "Run away in terror",
+	desc = "You turn back and run as fast as you can."
+);
+
+init approach_guard as Option (
+	name = "Approach the guard carefully",
+	desc = "You cautiously approach the skeleton guard."
+);
+
+# Possible following scenes
+init guard_parries as Scene (
+	name = "Guard parries",
+	desc = "The skeleton guard reacts with swift movements."
+);
+
+init back_at_village as Scene (
+	name = "Back at village",
+	desc = "You find yourself back in the village."
+);
+
+init cautious_approach as Scene (
+	name = "Cautious approach",
+	desc = "You silently move towards the guard." + \n + "You hide behind a corner, keeping your eyes on him."
+);
+
+# Setting scene options
+add_option attack_guard to guard_parries;
+add_option approach_guard to cautious_approach;
+add_option run_away to back_at_village;
+
+# Setting initial scene order
+add_next_scene guard_parries to shrine_entrance;
+add_next_scene cautious_approach to shrine_entrance;
+add_next_scene back_at_village to shrine_entrance;
+
+# Setting up following scene order
+add_next_scene guard_parries to cautious_approach;
+add_next_scene back_at_village to cautious_approach;
