@@ -6,10 +6,10 @@ Interactive fiction is software that simulates environments in which players use
 
 In recent years, as the field of game development became increasingly advanced, text adventures were produced less and less, creators beginning to favor games with cutting-edge non-textual graphics. However, text-based games have been the basis of influential genres such as adventure and role-playing video games, continuing to be written by independent developers.
 
-Following the belief that interactive fiction has not yet become irrelevant, _MANA_ is a programming language designed to simplify the development of text adventure games. By removing the complexity of visual design, it can help introduce people to game development with ease. It can be used to integrate non-visually artistic people that wish to express their narratives through video games but are impeded by graphic details. In addition, it can provide an appealing tool for role-playing game fans to develop, test and share their creative stories.
+Following the belief that interactive fiction has not yet become irrelevant, **MANA** is a programming language designed to simplify the development of text adventure games. By removing the complexity of visual design, it can help introduce people to game development with ease. It can be used to integrate non-visually artistic people that wish to express their narratives through video games but are impeded by graphic details. In addition, it can provide an appealing tool for role-playing game fans to develop, test and share their creative stories.
 
 ## Language Features
-_MANA_ is a programming language whose purpose is to automate and simplify the development of text adventure games.  
+MANA is a programming language whose purpose is to automate and simplify the development of text adventure games.  
 
 Its features include:
 - Creating personalized scenes and options (actions), using “plug and play” native functions
@@ -21,7 +21,7 @@ Its features include:
 - Ease of game execution (using the terminal)
 
 ## Syntax and Operations Guide
-**_MANA_ provides the following basic functionalities:**
+**MANA provides the following basic functionalities:**
 
 ### Create a Scene
 ```
@@ -75,7 +75,7 @@ _Scene_ objects also contain an internal _next\_scenes_ attribute, which stores 
 The _add\_next\_scene_ function adds the given child _Scene_ (first ID) to the given parent _Scene_ (second ID).  
 
 
-**In addition, _MANA_ provides some functionalities more specialized toward command-line usage:**
+**In addition, MANA provides some functionalities more specialized toward command-line usage:**
 
 ### Modify an object
 ```
@@ -153,7 +153,7 @@ add_next_scene back_at_village to cautious_approach;
 ```
 
 ## How to Run MANA Code
-To run a game in _MANA_:
+To run a game in MANA:
 - Write the code in a text file.
 - In the terminal, move to the MANA project directory.
 - Run the MANA main script, passing the filename or the path to the file as an argument.
