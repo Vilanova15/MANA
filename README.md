@@ -17,7 +17,7 @@ Its features include:
 - String concatenation and newline insertion
 - Object\-oriented approach
 - Simplifying tree implementation for story decisions and paths
-- Text\-file and command\-line interfaces
+- Text\-file and command\-line (debug) interfaces
 - Ease of game execution (using the terminal)
 
 ## Syntax and Operations Guide
