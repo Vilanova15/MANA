@@ -1,4 +1,4 @@
-##
+
 ## Introduction and Motivation
 
 Interactive fiction is software that simulates environments in which players use text commands to control characters and influence the world around them. In common usage, the term refers to text adventures, a type of adventure game where the entire interface is usually "text-only". Text adventures are one of the oldest types of computer games, and they form a subset of the adventure genre. They reached their peak in popularity in the late 1970s, with the release of notable titles such as _Zork_ and _The Hitchhiker's Guide to the Galaxy_. By the 1980s parser-driven text adventure games had defined home-computer entertainment.
@@ -10,7 +10,7 @@ Following the belief that interactive fiction has not yet become irrelevant, _MA
 ## Language Features
 _MANA_ is a programming language whose purpose is to automate and simplify the development of text adventure games.  
 
-Its features include:  
+Its features include:
 - Creating personalized scenes and options (actions), using “plug and play” native functions
 - Variable definition
 - String concatenation and newline insertion
@@ -22,7 +22,7 @@ Its features include:
 ## Syntax and Operations Guide
 **_MANA_ provides the following basic functionalities:**
 
-#### Create a Scene
+### Create a Scene
 ```
 init shrine_entrance as Scene (
 	name = "Shrine Entrance",
@@ -32,7 +32,7 @@ init shrine_entrance as Scene (
 The _init/as_ command can initialize a _Scene_ object and store it under the given reference name. The _Scene_ object takes two string parameters: a name and a description.  
 The string value for an attribute can be formed by a single string, or by the concatenation of multiple strings. The newline token `\n` inserts a newline between two strings. 
 
-#### Create an Option
+### Create an Option
 ```
 init attack_guard as Option (
 	name = "Attack the guard",
@@ -42,7 +42,7 @@ init attack_guard as Option (
 The _init/as_ statement can initialize an _Option_ object and store it under the given reference name. The _Option_ object takes two string parameters: a name and a description.  
 Like the _Scene_ object, its attributes support string concatenation and newline insertion.
 
-#### Variable definition and usage
+### Variable definition and usage
 ```
 var d1 = "You change in! No time for questions!";
 
@@ -54,7 +54,7 @@ init attack_guard as Option (
 The _var_ command specifies variable definition, which stores a given string value under the given reference name.  
 A variable can substitute literal strings in attribute declarations.
 
-#### Set scene's trigger option
+### Set scene's trigger option
 ```
 init guard_parries as Scene (
 	name = "Guard parries",
@@ -66,17 +66,17 @@ add_option attack_guard to guard_parries;
 _Scene_ objects contain an internal _option_ attribute, which refers to the user choice that triggers the scene (also called "trigger option").   
 The _add\_option_ function sets the given _Option_ (first ID) as the trigger option for the given _Scene_ (second ID).
 
-#### Add a possible following scene to parent scene
+### Add a possible following scene to a parent scene
 ```
 add_next_scene guard_parries to shrine_entrance;
 ```
 _Scene_ objects also contain an internal _next\_scenes_ attribute, which stores references to all the possible following scenes it can move to.  
-The _add\_next\_scene_ function adds the given child _Scene_ (first ID) to the given parent _Scene_ (second ID).
+The _add\_next\_scene_ function adds the given child _Scene_ (first ID) to the given parent _Scene_ (second ID).  
 
 
 **In addition, _MANA_ provides some functionalities more specialized toward command-line usage:**
 
-#### Modify an object
+### Modify an object
 ```
 modify guard_parries (
 	name = "Guard parries",
@@ -85,7 +85,7 @@ modify guard_parries (
 ```
 The _modify_ function updates the referenced object's attributes.
 
-#### Display a scene or option's details
+### Display a scene or option's details
 ```
 display_scene shrine_entrance;
 display_option attack_guard;
@@ -161,10 +161,12 @@ To run a game in _MANA_:
 ## Implementation Tools and Approach
 ### Modules and Classes
 The external library used for language development is PLY, which contains the Yacc and Lex modules that are used as the base for the implementation of the parser and lexer.  
+
 The intermediate code is built using custom modules and classes. The _scene_ module contains the _Scene_ and _Option_ classes, used to create and manipulate scenes and options. The _game\_engine_ module contains the _GameEngine_ class, which is used to run written games (by traversing the scene tree), including loading and game over screens. Lastly, the _banner_ module contains functions to print ASCII art, which are used to generate the loading and game over screens.  
 
 ### Methodology
 The parser includes two global variables: a reference log dictionary (for storing initialized variables and objects) and an initial scene (for storing a reference to the root of the scene tree). The _Scene_ and _Option_ classes are called and used for creating, modifying and displaying instances, as well as building the scene tree. Once the code is parsed and set up, the _GameEngine_ class is called to run the game.  
+
 The game engine runs the game recursively from the root scene, checking for possible following scenes, outputting the option list and asking for user input. The user chooses the action to take and the engine moves to the following scene. If it reaches a dead end, the engine ends the game with a game over screen.
 
 ### Tools and Environment
