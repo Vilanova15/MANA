@@ -1,3 +1,4 @@
+ <head><link rel="shortcut icon" type="image/png" href="Logo.png"></head>
 
 ## Introduction and Motivation
 
