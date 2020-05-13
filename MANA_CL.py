@@ -1,4 +1,8 @@
-from Mana_parser import parser, lexer
+from scripts import Mana_parser
+
+parser = Mana_parser.parser
+lexer = Mana_parser.lexer
+Mana_parser.debug = True
 
 def main():
     print("Welcome to MANA!\n")
