@@ -9,6 +9,7 @@ from .game_engine import GameEngine
 
 reference_log = {}
 initialScene: Scene = None
+debug: bool = False
 
 ### ----------------------------------------------------------------------
 
@@ -109,8 +110,9 @@ def p_Main(p):
     """
     p[0] = p[1]
     engine = GameEngine()
-    engine.loading_screen()
-    engine.run_game(initialScene)
+    if not debug:
+        engine.loading_screen()
+        engine.run_game(initialScene)
 
 def p_Exp_Var(p):
     """
