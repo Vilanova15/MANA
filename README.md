@@ -158,6 +158,15 @@ To run a game in MANA:
 - In the terminal, move to the MANA project directory.
 - Run the MANA main script, passing the filename or the path to the file as an argument.
 	- More specifically: `python MANA.py filename.txt` or `python MANA.py /path/to/file`.
+	- To exit a game prematurely, press `CTRL+C`.
+	
+## How to Debug MANA Code
+To debug code in MANA:
+- In the terminal, move to the MANA project directory.
+- Run the MANA\_CL script, by writing `python MANA_CL.py`. This will open the command\-line interface.
+	- While in this mode, you can write lines of code to test and debug your game.
+	- To exit this mode, write `quit;`.
+	- Once your code has been tested, you can run your game by following the steps in the previous section.
 
 ## Implementation Tools and Approach
 ### Modules and Classes
