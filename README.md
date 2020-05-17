@@ -1,4 +1,8 @@
  <head><link rel="shortcut icon" type="image/png" href="Logo.png"></head>
+ 
+## Download MANA  
+
+[MANA](https://github.com/Vilanova15/MANA/archive/master.zip "Download MANA")
 
 ## Introduction and Motivation
 
