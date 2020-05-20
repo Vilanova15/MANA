@@ -99,7 +99,8 @@ The _display\_scene_ function displays a scene's details in the terminal: name, 
 The _display\_option_ function displays an option's details in the terminal: name and description.
 
 ## Video Commercial/Tutorial
-<iframe width="560" height="315" src="https://youtu.be/wJb_Sb665S0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+https://youtu.be/wJb_Sb665S0
+<iframe width="560" height="315" src="https://youtu.be/wJb_Sb665S0" frameborder="0" allow="autoplay" allowfullscreen></iframe>
 
 ## Video Demonstration
 
