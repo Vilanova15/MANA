@@ -98,8 +98,10 @@ display_option attack_guard;
 The _display\_scene_ function displays a scene's details in the terminal: name, description, trigger option and next scenes.  
 The _display\_option_ function displays an option's details in the terminal: name and description.
 
-## Video Tutorial and Demonstration
+## Video Commercial/Tutorial
+<iframe width="560" height="315" src="https://youtu.be/wJb_Sb665S0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+## Video Demonstration
 
 ## Sample Code
 ```
