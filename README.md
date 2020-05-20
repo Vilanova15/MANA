@@ -1,4 +1,4 @@
- <head><link rel="shortcut icon" type="image/png" href="Logo.png"></head>
+<head><link rel="shortcut icon" type="image/png" href="Logo.png"></head>
  
 ## Download MANA  
 
@@ -100,7 +100,7 @@ The _display\_option_ function displays an option's details in the terminal: nam
 
 ## Video Commercial/Tutorial
 [https://youtu.be/wJb_Sb665S0](https://youtu.be/wJb_Sb665S0)
-<iframe width="560" height="315" src="https://youtu.be/wJb_Sb665S0" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wJb_Sb665S0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Video Demonstration
 
