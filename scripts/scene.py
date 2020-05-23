@@ -3,7 +3,7 @@ class Scene:
         self.name = name
         self.desc = desc
         self.option: Option = None
-        self.next_scenes = {}
+        self.next_scenes = []
 
     def play_scene(self):
         print(self.desc, "\n")
@@ -21,7 +21,7 @@ class Scene:
         else:
             print("Trigger option: ", self.option)
         print("Next scenes:")
-        for scene in self.next_scenes.values():
+        for scene in self.next_scenes:
             print(scene.name)
         print()
     
@@ -32,8 +32,11 @@ class Scene:
     def generate_option_list(self) -> list:
         option_list = []
         i = 1
-        for scene in self.next_scenes.values():
-            option = (i, scene.get_option().name)
+        for scene in self.next_scenes:
+            try:
+                option = (i, scene.get_option().name)
+            except:  
+                continue  
             option_list.append(option)
             i += 1
         
@@ -49,7 +52,7 @@ class Scene:
         return self.option
     
     def get_next_scenes(self) -> list:
-        return self.next_scenes.values()
+        return self.next_scenes
 
     def set_name(self, name):
         self.name = name
@@ -61,10 +64,10 @@ class Scene:
         self.option = option
 
     def add_next_scene(self, scene):
-        self.next_scenes[scene.get_name()] = scene
+        self.next_scenes.append(scene)
 
-    def remove_next_scene(self, scene_name):
-        del self.next_scenes[scene_name]
+    def remove_next_scene(self, scene):
+        self.next_scenes.remove(scene)
 
 
 class Option:

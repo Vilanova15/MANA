@@ -282,8 +282,12 @@ def p_StrList(p):
     StrList : STRING CONCAT StrList
             | STRING CONCAT NEWLINE CONCAT StrList
             | STRING
+            | Id
     """
-    strn = p[1].split('"')[1]
+    try:
+        strn = p[1].split('"')[1]
+    except:
+        strn = reference_log[p[1]]
     try:
         if not p[2]:
             p[0] = strn
