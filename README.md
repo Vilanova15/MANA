@@ -4,6 +4,11 @@
 
 [MANA](https://github.com/Vilanova15/MANA/archive/master.zip "Download MANA")
 
+## Dependencies
+
+[Python 3](https://www.python.org/downloads/)  
+[PLY](https://pypi.org/project/ply/)
+
 ## Introduction and Motivation
 
 Interactive fiction is software that simulates environments in which players use text commands to control characters and influence the world around them. In common usage, the term refers to text adventures, a type of adventure game where the entire interface is usually "text-only". Text adventures are one of the oldest types of computer games, and they form a subset of the adventure genre. They reached their peak in popularity in the late 1970s, with the release of notable titles such as _Zork_ and _The Hitchhiker's Guide to the Galaxy_. By the 1980s parser-driven text adventure games had defined home-computer entertainment.
