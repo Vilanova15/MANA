@@ -1,0 +1,457 @@
+
+var attackDeath = "Your attack was not strong enough."
+				+\n+"The creature parries your attack"
+				+\n+"and kills you.";
+
+var creepingDeath = "As you turn around a Moth faced humanoid is holding a floating orb of flames in his hand."
+				+\n+"..."
+				+\n+"A raspy voice echoes through the chamber:"
+				+\n+"'You have failed your prescious village'"
+				+\n+"The flame is snuffed and you suddenly cannot breathe."
+				+\n+"..."
+				+\n+"You are dead.";
+
+var mantisHumanoid = "You see a chitinous humanoid with scythes for hands."
+					+\n+"It raises its scythes.";
+var fireflyHumanoid = "You see a chitinous humanoid with glowing hands."
+					+\n+"It can clearly see you.";
+var spiderHumanoid = "You see a chitinous humanoid with eiht arms."
+					+\n+"It's piecing gaze strikes you and it hisses at you";
+
+var intersections = "The hallway split into two corridors";
+
+var sword_usage = "You charge in to cleave the insectoid...";
+var spell_usage = "You launch a fireball at the insectoid...";
+var arrow_usage = "You pull your bow and fire off an arrow at the insectoid...";
+
+init beggining_scene as Scene (
+	name = "Beggining Scene",
+	desc = ""
+	+\n+ "Welcome ... to the Motholeum." 
+	+\n+ "It's best to have an eye for detail it will be handy"
+	+\n+ "You stand in a dimly lit brick room."
+	+\n+ "You are here to end humanoid insects endagering the life of the village"
+	+\n+ "and you feel as if someone is stalking you through the darkness."
+	+\n+ "In front of you stand three podiums:"
+	+\n+ "the left one with a sword, the middle one with a gauntlet and the right one with a bow with a quiver."
+);
+
+init pickup_items as Option (
+	name = "Pick up the Items",
+	desc = ""
+	+\n+ "A raspy voice echoes through the chamber:"
+	+\n+ "'Armed with a sword, a magic gauntlet, and a bow you are now armed fo the following trails.'"
+	+\n+ "'I hope you do a better job than the others.'"
+);
+
+init exit_Motholeum as Option (
+	name = "Exit the Motholeum",
+	desc = ""
+);
+
+init mockery as Scene (
+	name = "Run from the voice",
+	desc = ""
+		+\n+ "A raspy voice echoes through the chamber:"
+		+\n+"'Well then..."
+		+\n+"There is no shame in quiting hehehe'"
+);
+
+init follow_voice as Scene (
+	name = "Follow the voice",
+	desc = ""
+		+\n+ "A door opens up as you make your way through the hallway and enter the new room"
+		+\n+ mantisHumanoid
+);
+
+init sword as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+init spell as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+init arrow as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+
+init mazeStart as Scene (
+	name = "Start of the Maze",
+	desc = ""
+		+\n+"After slaying the creature you see that the hallway split into two corridors"
+);
+
+init swordDeath as Scene(
+	name = "",
+	desc = attackDeath
+);
+init bowDeath as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+init up2 as Option (
+	name = "Go forward",
+	desc = "You go forward, take a left and a right"
+);
+
+init fireflyFight as Scene (
+	name = "",
+	desc = ""
+	+\n+ fireflyHumanoid
+	+\n+ "Its hands flicker from yellow to red"
+);
+
+init sword2 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+
+init spell2 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+
+init arrow2 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+
+init swordDeath2 as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+init spellDeath2 as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+init secondIntersection as Scene (
+	name = "",
+	desc = "You pierce the insectoid"
+		+\n+ intersections
+);
+init up5 as Option (
+	name = "Take a right",
+	desc = "You take two right and a left"
+);
+init flamingAltar as Scene (
+	name = "",
+	desc = "You see an altar with a burning wooden effigy"
+);
+
+init left4 as Option (
+	name = "Go forward",
+	desc = "You head down the corridor"
+);
+init corridorT as Scene (
+	name = "",
+	desc = intersections
+);
+
+init left8 as Option (
+	name = "Go left",
+	desc = "You head through the left corridor"
+);
+init mantisFight as Scene (
+	name = "",
+	desc = mantisHumanoid
+);
+init sword4 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+init spell4 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+init arrow4 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+init swordDeath4 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init bowDeath4 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init dobleDownCor as Scene(
+	name = "",
+	desc = "You cremate the creature"
+		+\n+ "There are two opening to your left"
+);
+
+init firstDown as Option (
+	name = "Go through the first door",
+	desc = "You take one step..."
+);
+init mothDeath2 as Scene(
+	name = "",
+	desc = creepingDeath
+);
+init secondDown as Option (
+	name = "Go towards the second door",
+	desc = "You you walk over to the second door..."
+);
+init emptyRoom as Scene(
+	name = "",
+	desc = "You see an empty room, better head back"
+);
+init goBack as Option (
+	name = "Go back",
+	desc = ""
+);
+init mothDeath3 as Scene(
+	name = "",
+	desc = creepingDeath
+);
+
+init right9 as Option (
+	name = "Go right",
+	desc = "You take a right, two lefts and two more rights... "
+);
+init insectoidHorde as Scene(
+	name = "",
+	desc = mantisHumanoid
+);
+init sword5 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+init spell5 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+init arrow5 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+init swordDeath5 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init bowDeath5 as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+init insectoidHorde2 as Scene(
+	name = "",
+	desc = spiderHumanoid
+);
+init sword6 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+init spell6 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+init arrow6 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+init spellDeath6 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init bowDeath6 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init insectoidHorde3 as Scene(
+	name = "",
+	desc = spiderHumanoid
+);
+
+init sword7 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+init spell7 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+init arrow7 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+init spellDeath7 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init bowDeath7 as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+
+####################################################################################
+init insectoidHorde4 as Scene(
+	name = "",
+	desc = fireflyHumanoid
+);
+init sword8 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+init spell8 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+init arrow8 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+init spellDeath8 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init swordDeath8 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init swordDeath8 as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+####################################################################################
+
+init right3 as Option (
+	name = "Go right",
+	desc = "You head through a straight corridor."
+);
+init omegaIntersection as Scene (
+	name = "",
+	desc = "The corridor now splits into two paths"
+);
+init up6 as Option (
+	name = "Take a left",
+	desc = "You take two lefts, two rights, four lefts and two rights."
+);
+init spiderFight as Scene (
+	name = "",
+	desc = spiderHumanoid
+);
+init sword3 as Option (
+	name = "Use the sword",
+	desc = sword_usage
+);
+
+init spell3 as Option (
+	name = "Use a spell",
+	desc = spell_usage
+);
+
+init arrow3 as Option (
+	name = "Use the bow",
+	desc = arrow_usage
+);
+
+init bowDeath3 as Scene(
+	name = "",
+	desc = attackDeath
+);
+
+init spellDeath3 as Scene(
+	name = "",
+	desc = attackDeath
+);
+init deadEnd as Scene(
+	name = "",
+	desc = "You cleave the insectoid "
+		+\n+ "It seems you reached a dead end, better head back."
+);
+init turnAround as Option (
+	name = "Turn around",
+	desc = ""
+);
+init mothDeath as Scene(
+	name = "",
+	desc = creepingDeath
+);
+
+
+# Setting scene options----------------------------------------------------------------------------
+
+add_option exit_Motholeum to mockery;
+
+add_option pickup_items to follow_voice;
+	add_option sword to swordDeath;
+	add_option arrow to bowDeath;
+	add_option spell to mazeStart;
+		add_option up2 to fireflyFight;
+			add_option sword to swordDeath2;
+			add_option spell to spellDeath2;
+			add_option arrow to secondIntersection;
+				add_option up5 to flamingAltar;
+				add_option left4 to corridorT;
+					add_option left8 to mantisFight;
+						add_option sword4 to swordDeath4;
+						add_option arrow4 to bowDeath4;
+						add_option spell4 to dobleDownCor;
+							add_option firstDown to mothDeath2;
+							add_option secondDown to emptyRoom;
+								add_option goBack to mothDeath3;
+					add_option right9 to insectoidHorde;
+						add_option sword5 to swordDeath5;
+						add_option arrow5 to bowDeath5;
+						add_option spell5 to insectoidHorde2;
+							add_option spell6 to spellDeath6;
+							add_option arrow6 to bowDeath6;
+							add_option sword6 to insectoidHorde3;
+								add_option spell7 to spellDeath7;
+								add_option arrow7 to bowDeath7;
+								add_option sword7 to insectoidHorde4;
+
+		add_option right3 to omegaIntersection;
+			add_option up6 to spiderFight;
+				add_option spell3 to spellDeath3;
+				add_option arrow3 to bowDeath3;
+				add_option sword3 to deadEnd;
+					add_option turnAround to mothDeath;
+
+# Setting initial scene order+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+add_next_scene follow_voice to beggining_scene;
+add_next_scene mockery to beggining_scene;
+
+add_next_scene swordDeath to follow_voice;
+add_next_scene bowDeath to follow_voice;
+add_next_scene mazeStart to follow_voice;
+
+	add_next_scene fireflyFight to mazeStart;
+		add_next_scene swordDeath2 to fireflyFight;
+		add_next_scene spellDeath2 to fireflyFight;
+		add_next_scene secondIntersection to fireflyFight;
+			add_next_scene flamingAltar to secondIntersection;
+			add_next_scene corridorT to secondIntersection;
+				add_next_scene swordDeath4 to mantisFight;
+				add_next_scene bowDeath4 to mantisFight;
+				add_next_scene mantisFight to corridorT;
+					add_next_scene dobleDownCor to mantisFight;
+						add_next_scene mothDeath2 to dobleDownCor;
+						add_next_scene emptyRoom to dobleDownCor;
+							add_next_scene mothDeath3 to emptyRoom;
+				add_next_scene insectoidHorde to corridorT;
+					add_next_scene swordDeath5 to insectoidHorde;
+					add_next_scene bowDeath5 to insectoidHorde;
+					add_next_scene insectoidHorde2 to insectoidHorde;
+						add_next_scene spellDeath6 to insectoidHorde2;
+						add_next_scene bowDeath6 to insectoidHorde2;
+						add_next_scene insectoidHorde3 to insectoidHorde2;
+							add_next_scene spellDeath7 to insectoidHorde3;
+							add_next_scene bowDeath7 to insectoidHorde3;
+							add_next_scene insectoidHorde4 to insectoidHorde3;
+
+	add_next_scene omegaIntersection to mazeStart;
+		add_next_scene spiderFight to omegaIntersection;
+			add_next_scene bowDeath3 to spiderFight;
+			add_next_scene spellDeath3 to spiderFight;
+			add_next_scene deadEnd to spiderFight;
+				add_next_scene mothDeath to deadEnd;
