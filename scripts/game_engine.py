@@ -30,7 +30,7 @@ class GameEngine:
         opt_list = scene.generate_option_list()
 
         if len(opt_list)==0:
-            if len(scene.get_next_scenes()) == 0
+            if len(scene.get_next_scenes()) == 0:
                 print(scene.get_desc())
                 time.sleep(4)
                 self.game_over()
