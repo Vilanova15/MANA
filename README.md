@@ -1,4 +1,13 @@
- <head><link rel="shortcut icon" type="image/png" href="Logo.png"></head>
+<head><link rel="shortcut icon" type="image/png" href="Logo.png"></head>
+ 
+## Download MANA  
+
+[MANA](https://github.com/Vilanova15/MANA/archive/master.zip "Download MANA")
+
+## Dependencies
+
+[Python 3](https://www.python.org/downloads/)  
+[PLY](https://pypi.org/project/ply/)
 
 ## Introduction and Motivation
 
@@ -94,8 +103,10 @@ display_option attack_guard;
 The _display\_scene_ function displays a scene's details in the terminal: name, description, trigger option and next scenes.  
 The _display\_option_ function displays an option's details in the terminal: name and description.
 
-## Video Tutorial and Demonstration
+## Video Commercial/Tutorial
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wJb_Sb665S0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+## Video Demonstration
 
 ## Sample Code
 ```
@@ -182,7 +193,7 @@ The game engine runs the game recursively from the root scene, checking for poss
 ### Tools and Environment
 - **Python 3**: programming language used for development.
 - **PLY**: Python library used for lexer and parser development.
-- **Visual Studio Code**: programming IDE used for development.
+- **Visual Studio Code**: text editor with IDE features used for development.
 - **GitHub**: web-based tool used for version control.
 
 ## Development Team
