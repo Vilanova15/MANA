@@ -281,6 +281,7 @@ def p_StrList(p):
     """
     StrList : STRING CONCAT StrList
             | STRING CONCAT NEWLINE CONCAT StrList
+            | Id CONCAT NEWLINE CONCAT StrList
             | STRING
             | Id
     """
