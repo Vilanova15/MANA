@@ -193,7 +193,7 @@ The game engine runs the game recursively from the root scene, checking for poss
 ### Tools and Environment
 - **Python 3**: programming language used for development.
 - **PLY**: Python library used for lexer and parser development.
-- **Visual Studio Code**: programming IDE used for development.
+- **Visual Studio Code**: text editor with IDE features used for development.
 - **GitHub**: web-based tool used for version control.
 
 ## Development Team
