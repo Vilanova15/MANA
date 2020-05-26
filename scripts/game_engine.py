@@ -35,6 +35,7 @@ class GameEngine:
                 time.sleep(4)
                 self.game_over()
                 return
+            print(scene.get_desc(), "\n")
             self.run_game(scene.get_next_scenes()[0])
             return
 
